@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_gravity="top"
+        android:layout_width="match_parent"
+        android:elevation="4dp"
+        android:layout_height="wrap_content">
+
+        <fr.ganfra.materialspinner.MaterialSpinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ms_hint="Choose A Category"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            app:ms_enableFloatingLabel="true"
+            app:ms_floatingLabelText="Viewing Category"
+            app:ms_baseColor="@color/colorPrimary"
+            app:ms_highlightColor="@color/colorPrimary"
+            app:ms_errorColor="@color/white"
+            app:ms_thickness="1dp"
+            app:ms_hintColor="@color/colorAccent"
+            app:ms_floatingLabelColor="@color/colorPrimary"/>
+
+    </LinearLayout>
+
+    <sapphyx.gsd.com.drywall.views.RevealLayout
+        android:id="@+id/container"
+        android:layout_marginTop="112dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</FrameLayout>

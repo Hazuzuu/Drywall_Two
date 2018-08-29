@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Current Homescreen"
+            android:textColor="@color/dark_grey"/>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="242dp"
+            app:cardCornerRadius="6dp"
+            android:elevation="4dp"
+            android:layout_margin="6dp">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/wallpaperView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="true"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@color/colorPrimary" />
+            </FrameLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:elevation="4dp"
+            android:id="@+id/lockscreen_Card"
+            android:layout_width="match_parent"
+            android:layout_height="242dp"
+            app:cardCornerRadius="6dp"
+            android:layout_margin="6dp"
+            android:visibility="gone">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/lockscreenView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="true"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@color/colorPrimary" />
+
+                <FrameLayout
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:layout_gravity="top"
+                    android:gravity="center"
+                    android:background="@color/transparent_white"
+                    android:orientation="vertical"
+                    android:padding="6dp">
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:paddingTop="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|start"
+                        android:text="Lock screen"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/textView9"
+                        android:layout_gravity="bottom|start"
+                        android:paddingBottom="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="Current"
+                        android:textColor="@color/dark_grey" />
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:src="@drawable/ic_photo"
+                        android:tint="@color/dark_grey"
+                        android:layout_gravity="end|center"/>
+                </FrameLayout>
+            </FrameLayout>
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="General Information"
+            android:textColor="@color/dark_grey"/>
+
+        <FrameLayout
+            android:id="@+id/app_container"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:layout_margin="6dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="32dp"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical"
+                android:padding="4dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="72dp"
+                    android:text="Drywall 2"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="72dp"
+                    android:text="The sequal to the original, Drywall is an open source wallpaper application by GocalSD."
+                    android:textColor="@color/dark_grey"
+                    android:textSize="14sp" />
+            </LinearLayout>
+            <ImageView
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="start|center"
+                android:padding="8dp"
+                android:src="@mipmap/ic_launcher" />
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_gravity="end|center"
+                android:padding="8dp"
+                android:src="@drawable/ic_open_in_new_black_24dp"
+                android:tint="@color/dark_grey" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/more_container"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:layout_margin="6dp">
+            <LinearLayout
+                android:layout_marginStart="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="32dp"
+                android:orientation="vertical"
+                android:padding="4dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="More Apps"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Check out some of my other projects im working on!"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="14sp" />
+            </LinearLayout>
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_gravity="end|center"
+                android:padding="8dp"
+                android:src="@drawable/ic_open_in_new_black_24dp"
+                android:tint="@color/dark_grey" />
+        </FrameLayout>
+
+
+
+    </LinearLayout>
+
+</ScrollView>

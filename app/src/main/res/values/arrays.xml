@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="items">
+        <item>CnL Do Photos</item>
+        <item>GocalSD</item>
+        <item>Environments</item>
+        <item>OEM</item>
+        <item>Colors</item>
+        <item>CityScapes</item>
+        <item>Life</item>
+        <item>Pixel</item>
+        <item>Earth</item>
+    </string-array>
+</resources>

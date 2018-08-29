@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Application"/>
+
+    <Preference
+        android:title="Rate"
+        android:summary="Leave some feedback, so we know what to improve on and what categories to focus on!"/>
+
+    <Preference
+        android:title="Contact"
+        android:summary="Contact the developer directly or follow on social media."/>
+
+    <PreferenceCategory
+        android:title="Preferences"/>
+
+    <Preference
+        android:key="info"
+        android:title="Application Info" />
+
+    <Preference
+        android:key="reset"
+        android:title="Reset Data"
+        android:summary="Erases the application's cache data and resets it to first time usage."/>
+
+</PreferenceScreen>
