@@ -77,10 +77,10 @@ public class CollectionsEight extends Fragment {
     public CollectionsEight() {
     }
 
-    public static CollectionsOne newInstance(int instance) {
+    public static CollectionsEight newInstance(int instance) {
         Bundle args = new Bundle();
         args.putInt(ARGS_INSTANCE, instance);
-        CollectionsOne fragment = new CollectionsOne();
+        CollectionsEight fragment = new CollectionsEight();
         fragment.setArguments(args);
         return fragment;
     }
