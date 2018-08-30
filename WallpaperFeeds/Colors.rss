@@ -5,87 +5,60 @@
   <title>Drywall2</title>
   <link>https://github.com/rgocal/Drywall/new/Drywall2/featured_walls.rss</link>
   <description>A RSS dedicated to companion news.</description>
+  
   <item>
-    <title>Michael Baldovinos</title>
+    <title>Red</title>
     <content:encoded>
 <![CDATA[
-<p><img class="alignnone size-large wp-image-826374" src="https://images.unsplash.com/photo-1519670778009-3074bc50bd2e?ixlib=rb-0.3.5&s=0f344b929be11f573bbb3e5014e3ac35&auto=format&fit=crop&w=1331&q=80">
+<p><img class="alignnone size-large wp-image-826374" src="http://mike.teczno.com/img/pantone/2012-tangerine-tango.png">
 ]]>
 </content:encoded>
   </item>
-  <item>
-    <title>Sacha Styles</title>
+  
+    <item>
+    <title>Orange</title>
     <content:encoded>
 <![CDATA[
-<p><img class="alignnone size-large wp-image-826374" src="https://images.unsplash.com/photo-1518144591331-17a5dd71c477?ixlib=rb-0.3.5&s=413d2357b5302d2e3deb46adc8e570b8&auto=format&fit=crop&w=700&q=80">
+<p><img class="alignnone size-large wp-image-826374" src="https://www.colorcombos.com/images/colors/FF9900.png">
 ]]>
 </content:encoded>
   </item>
-  <item>
-    <title>Sacha Styles</title>
+  
+    <item>
+    <title>Yellow</title>
     <content:encoded>
 <![CDATA[
-<p><img class="alignnone size-large wp-image-826374" src="https://images.unsplash.com/photo-1518265561053-fe6ec63f0792?ixlib=rb-0.3.5&s=726f722c449684421b82b39ee18262cb&auto=format&fit=crop&w=634&q=80">
+<p><img class="alignnone size-large wp-image-826374" src="http://www.color-hex.com/palettes/33328.png">
 ]]>
 </content:encoded>
   </item>
-  <item>
-    <title>Lachlan Dempsey</title>
+  
+   <item>
+    <title>Green</title>
     <content:encoded>
 <![CDATA[
-<p><img class="alignnone size-large wp-image-826374" src="https://images.unsplash.com/photo-1503023816554-bee7fc3d8442?ixlib=rb-0.3.5&s=3d2e3421f11897c99b6230cc66d2d810&auto=format&fit=crop&w=700&q=80">
+<p><img class="alignnone size-large wp-image-826374" src="http://www.color-hex.com/palettes/1027.png">
 ]]>
 </content:encoded>
   </item>
-  <item>
-    <title>Xandtor</title>
+  
+    <item>
+    <title>Teal</title>
     <content:encoded>
 <![CDATA[
-<p><img class="alignnone size-large wp-image-826374" src="https://images.unsplash.com/photo-1511137354177-fc53b5ef9a9a?ixlib=rb-0.3.5&s=a96b1153e2704d143833628205961b69&auto=format&fit=crop&w=634&q=80">
+<p><img class="alignnone size-large wp-image-826374" src="https://i.ytimg.com/vi/12g2t7G54nA/maxresdefault.jpg">
 ]]>
 </content:encoded>
   </item>
-  <item>
-    <title>Manuel Meurisse</title>
+  
+   <item>
+    <title>Blue</title>
     <content:encoded>
 <![CDATA[
-<p><img class="alignnone size-large wp-image-826374" src="https://images.unsplash.com/photo-1512036666432-2181c1f26420?ixlib=rb-0.3.5&s=b534ffb0ab3e3f1a929b54e7ef443a5e&auto=format&fit=crop&w=634&q=80">
-]]>
-</content:encoded>
-  </item>
-  <item>
-    <title>Taylor Ann Wright</title>
-    <content:encoded>
-<![CDATA[
-<p><img class="alignnone size-large wp-image-826374" src="https://images.unsplash.com/photo-1508366717390-1b54517b6cce?ixlib=rb-0.3.5&s=c12f5528a7a5e29548e91cd0af96a001&auto=format&fit=crop&w=1350&q=80">
-]]>
-</content:encoded>
-  </item>
-  <item>
-    <title>Leio McLaren</title>
-    <content:encoded>
-<![CDATA[
-<p><img class="alignnone size-large wp-image-826374" src="https://images.unsplash.com/photo-1498889444388-e67ea62c464b?ixlib=rb-0.3.5&s=144a1d1963058e2826a79ef5aaf1fb4c&auto=format&fit=crop&w=701&q=80">
-]]>
-</content:encoded>
-  </item>
-  <item>
-    <title>Victoria Marshall</title>
-    <content:encoded>
-<![CDATA[
-<p><img class="alignnone size-large wp-image-826374" src="https://images.unsplash.com/photo-1502158817207-08ef5c149b03?ixlib=rb-0.3.5&s=32a9ce4b7dcc5fd29525c9d064d5f43f&auto=format&fit=crop&w=1267&q=80">
-]]>
-</content:encoded>
-  </item>
-  <item>
-    <title>Jacob Morch</title>
-    <content:encoded>
-<![CDATA[
-<p><img class="alignnone size-large wp-image-826374" src="https://images.unsplash.com/photo-1496208612508-eb52fba7d94e?ixlib=rb-0.3.5&s=faf64d1ec67af3726264ce9025c658d4&auto=format&fit=crop&w=800&q=80">
+<p><img class="alignnone size-large wp-image-826374" src="https://www.solidbackgrounds.com/images/2560x1440/2560x1440-blue-solid-color-background.jpg">
 ]]>
 </content:encoded>
   </item>
 
 </channel>
-
 </rss>
