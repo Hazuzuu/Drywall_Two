@@ -39,6 +39,8 @@ import static sapphyx.gsd.com.drywall.activity.MainActivityBase.ARGS_INSTANCE;
 
 /**
  * Created by ry on 2/12/18.
+ * This category is based on a blog system
+ * I upload random wallpapers from my blog I think are unique or my favorite I want to showcase
  */
 
 public class Featured extends Fragment {

@@ -1,6 +1,7 @@
 package sapphyx.gsd.com.drywall.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -37,6 +38,8 @@ public class About extends AppCompatActivity {
 
     public static class AboutFragment extends PreferenceFragment {
 
+        private String donateUrl = "https://play.google.com/store/apps/details?id=com.NxIndustries.Sapphire1NE";
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -61,6 +64,16 @@ public class About extends AppCompatActivity {
                 public boolean onPreferenceClick(Preference preference) {
                     final Intent intent = new Intent(getActivity(), AboutDev.class);
                     startActivity(intent);
+                    return false;
+                }
+            });
+
+            Preference prefDonate = findPreference("pref_donate");
+            prefDonate.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(donateUrl));
+                    startActivity(Intent.createChooser(i, "Open Using"));
                     return false;
                 }
             });

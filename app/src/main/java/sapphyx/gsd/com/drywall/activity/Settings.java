@@ -23,6 +23,8 @@ import sapphyx.gsd.com.drywall.util.SettingsProvider;
 
 /**
  * Created by ry on 2/11/18.
+ * Simple settings activity for handling values
+ * This probably could be improve or actually removed and replaced with dialogs
  */
 
 public class Settings extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
@@ -72,6 +74,7 @@ public class Settings extends AppCompatActivity implements SharedPreferences.OnS
             @Override
             public void onClick(View v) {
                 onBackPressed();
+                finish();
             }
         });
 

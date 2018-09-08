@@ -16,7 +16,7 @@
             android:id="@+id/a"
             android:gravity="center"
             android:background="@color/colorPrimaryDark"
-            android:src="@mipmap/ic_launcher_drywall_round"
+            android:src="@mipmap/ic_launcher_round"
             android:scaleType="fitCenter" />
 
         <sapphyx.gsd.com.drywall.views.IntrusiveTextView
@@ -40,7 +40,7 @@
             android:id="@+id/btn_dialog"
             android:gravity="center_vertical|center_horizontal"
             android:layout_below="@+id/text_dialog"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/bg_pill"
             android:backgroundTint="@color/colorPrimary"

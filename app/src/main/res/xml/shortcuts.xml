@@ -5,7 +5,7 @@
     <shortcut
         android:shortcutId="categoryOne"
         android:enabled="true"
-        android:icon="@mipmap/ic_launcher_drywall_round"
+        android:icon="@mipmap/ic_launcher_round"
         android:shortcutShortLabel="@string/categoryOne_short"
         android:shortcutLongLabel="@string/categoryOne_long"
         android:shortcutDisabledMessage="@string/disabled_message"
@@ -19,7 +19,7 @@
     <shortcut
         android:shortcutId="categoryTwo"
         android:enabled="true"
-        android:icon="@mipmap/ic_launcher_drywall_round"
+        android:icon="@mipmap/ic_launcher_round"
         android:shortcutShortLabel="@string/categoryTwo_short"
         android:shortcutLongLabel="@string/categoryTwo_long"
         android:shortcutDisabledMessage="@string/disabled_message"

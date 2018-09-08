@@ -3,12 +3,9 @@ package sapphyx.gsd.com.drywall.activity;
 import android.animation.ValueAnimator;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -16,15 +13,18 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 
 import sapphyx.gsd.com.drywall.R;
-import sapphyx.gsd.com.drywall.fragments.Categories;
+import sapphyx.gsd.com.drywall.fragments.CategoriesGrid;
 import sapphyx.gsd.com.drywall.fragments.Device;
 import sapphyx.gsd.com.drywall.fragments.Featured;
 import sapphyx.gsd.com.drywall.util.RoundDialogHelper;
 import sapphyx.gsd.com.drywall.views.IntrusiveTextView;
 import sapphyx.gsd.com.drywall.views.RevealLayout;
+
+/**
+ * The Main Activity that uses bottombar to inflate three main fragments
+ */
 
 public class MainActivityBase extends AppCompatActivity {
 
@@ -86,7 +86,7 @@ public class MainActivityBase extends AppCompatActivity {
                                 mRevealLayout.show(700);
                                 break;
                             case R.id.action_item3:
-                                selectedFragment = Categories.newInstance(2);
+                                selectedFragment = CategoriesGrid.newInstance(2);
                                 mRevealLayout.show(700);
                                 break;
                         }

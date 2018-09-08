@@ -55,4 +55,5 @@
     <string name="blur_message">Blurring your wallpaper will consume a considerable amount of ram and cpu usage thus this process may take longer on older devices, would you like to continue? Please wait patiently until process has finished!</string>
     <string name="first_categories_message">Heads Up! Servers are still updating so, some of the wallpaper categories may not be up to par with their specific categories. Give it some time and we will have some fresh content live soon!</string>
     <string name="first_perm_message">In order for Drywall to function correctly, it\'s going to need access to a few run-time permissions. Denying them access will prevent the application from running.</string>
+    <string name="app_donate">Like my work? Consider purchasing my donation key as a token of appreciation for Drywall development.</string>
 </resources>

@@ -1,6 +1,5 @@
 package sapphyx.gsd.com.drywall.fragments;
 
-import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.WallpaperManager;
@@ -35,7 +34,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -43,6 +41,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.leinardi.android.speeddial.SpeedDialActionItem;
+import com.leinardi.android.speeddial.SpeedDialOverlayLayout;
+import com.leinardi.android.speeddial.SpeedDialView;
 import com.nj.imagepicker.ImagePicker;
 import com.nj.imagepicker.listener.ImageResultListener;
 import com.nj.imagepicker.result.ImageResult;
@@ -51,9 +52,6 @@ import com.nj.imagepicker.utils.DialogConfiguration;
 import java.io.IOException;
 
 import dmax.dialog.SpotsDialog;
-import jahirfiquitiva.libs.fabsmenu.FABsMenu;
-import jahirfiquitiva.libs.fabsmenu.FABsMenuListener;
-import jahirfiquitiva.libs.fabsmenu.TitleFAB;
 import sapphyx.gsd.com.drywall.R;
 import sapphyx.gsd.com.drywall.activity.About;
 import sapphyx.gsd.com.drywall.activity.Settings;
@@ -65,6 +63,7 @@ import static sapphyx.gsd.com.drywall.activity.MainActivityBase.ARGS_INSTANCE;
 
 /**
  * Created by ry on 2/11/18.
+ * This is where the magic happens
  */
 
 public class Device extends Fragment {
@@ -76,8 +75,6 @@ public class Device extends Fragment {
     NumberTextview wallCount, categoryCount, featuredCount, providerCount;
 
     int collectionsTotal, categoryOne, categoryTwo, categoryThree, categoryFour, categoryFive, categorySix, categorySeven, categoryEight, categoryNine;
-
-    TitleFAB blur, reset, setCustomOffset, setSingleOffest, customPaper;
 
     private String URL_SOURCE = "https://github.com/rgocal/Drywall_Two";
     private String URL_RATE = "https://play.google.com/store/apps/details?id=sapphyx.gsd.com.drywall";
@@ -100,19 +97,6 @@ public class Device extends Fragment {
         return fragment;
     }
 
-    int getScreenHeight() {
-        DisplayMetrics displaymetrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        return displaymetrics.heightPixels;
-    }
-
-    public void animateOnScreen(View view) {
-        final int screenHeight = getScreenHeight();
-        ObjectAnimator animator = ObjectAnimator.ofFloat(view, "y", screenHeight, (screenHeight * 0.8F));
-        animator.setInterpolator(new DecelerateInterpolator());
-        animator.start();
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,12 +112,11 @@ public class Device extends Fragment {
 
         wallpaper = v.findViewById(R.id.wallpaperView);
 
-        //menu options
-        reset = v.findViewById(R.id.clear_wallpaper);
-        setSingleOffest = v.findViewById(R.id.single_offset);
-        setCustomOffset = v.findViewById(R.id.custom_offset);
-        blur = v.findViewById(R.id.blur);
-        customPaper = v.findViewById(R.id.custom_wallpaper);
+        SpeedDialView speedDialView = v.findViewById(R.id.speedDial);
+        SpeedDialOverlayLayout overlayLayout = v.findViewById(R.id.overlay);
+        speedDialView.setOverlayLayout(overlayLayout);
+
+        speedDialView.inflate(R.menu.action_menu);
 
         applyMessage = getString(R.string.apply_message);
         blurMsg = getString(R.string.blur_message);
@@ -147,6 +130,8 @@ public class Device extends Fragment {
         categoryCount = v.findViewById(R.id.categoryCount);
         featuredCount = v.findViewById(R.id.featuredCount);
         providerCount = v.findViewById(R.id.providersCount);
+
+        AnimationHelper.animateGroup(v.findViewById(R.id.info_walls), v.findViewById(R.id.info_categories), v.findViewById(R.id.info_featured), v.findViewById(R.id.info_providers));
 
         //archive items
         source = v.findViewById(R.id.app_container);
@@ -229,101 +214,45 @@ public class Device extends Fragment {
         height = metrics.heightPixels;
         width = metrics.widthPixels;
 
-        final FABsMenu menu = v.findViewById(R.id.fabs_menu);
-        menu.setMenuUpdateListener(new FABsMenuListener() {
+        speedDialView.setOnActionSelectedListener(new SpeedDialView.OnActionSelectedListener() {
             @Override
-            public void onMenuClicked(FABsMenu fabsMenu) {
-                super.onMenuClicked(fabsMenu);
-            }
-        });
-
-
-        if (menu.getVisibility() == View.INVISIBLE) {
-            menu.setVisibility(View.VISIBLE);
-            animateOnScreen(menu);
-        }
-
-
-        reset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    wallpaperManager.clear();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                refreshWallpaperPreview();
-            }
-        });
-
-        customPaper.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ImagePicker.build(new DialogConfiguration()
-                        .setTitle("Select Custom Wallpaper")
-                        .setOptionOrientation(LinearLayoutCompat.HORIZONTAL), new ImageResultListener() {
-                    @Override
-                    public void onImageResult(final ImageResult imageResult) {
-                        //Take data and put it in wallpaper manager and preview
+            public boolean onActionSelected(SpeedDialActionItem speedDialActionItem) {
+                switch (speedDialActionItem.getId()) {
+                    case R.id.action_blur:
                         final Dialog dialog = new Dialog(getContext());
                         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        dialog.setCancelable(false);
                         dialog.setContentView(R.layout.round_dialog_buttons);
 
                         TextView text = dialog.findViewById(R.id.text_dialog);
-                        text.setText(applyMessage);
+                        text.setText(blurMsg);
 
-                        Button dialogButton = dialog.findViewById(R.id.btn_dialog);
-                        dialogButton.setText("Homescreen");
-                        dialogButton.setOnClickListener(new View.OnClickListener() {
+                        Button dialogButtonTwo = dialog.findViewById(R.id.btn_dialog_two);
+                        dialogButtonTwo.setText("Cancel");
+                        dialogButtonTwo.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void onClick(View v) {
-                                final AlertDialog dialogApply = new SpotsDialog(getContext());
-                                dialogApply.show();
-                                dialogApply.setMessage("Applying...");
-                                Handler handler = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    public void run() {
-                                        //Apply to Homescreen
-                                        try {
-                                            WallpaperManager.getInstance(getActivity()).setBitmap(imageResult.getBitmap());
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                            Toast.makeText(getContext(), "Err, Something went wrong...", Toast.LENGTH_SHORT).show();
-                                            Log.e("Drywall", "Custom wallpaper couldn't be captured properly");
-                                        }
-                                        refreshWallpaperPreview();
-                                        dialogApply.dismiss();
-                                    }
-                                }, 3000);
+                            public void onClick(View view) {
                                 dialog.dismiss();
-
                             }
                         });
 
-                        Button dialogButtonTwo = dialog.findViewById(R.id.btn_dialog_two);
-                        dialogButtonTwo.setText("Lockscreen");
-                        dialogButtonTwo.setOnClickListener(new View.OnClickListener() {
+                        Button dialogButton = dialog.findViewById(R.id.btn_dialog);
+                        dialogButton.setText("Blur Wallpaper");
+                        dialogButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                final AlertDialog dialogApply = new SpotsDialog(getContext());
-                                dialogApply.show();
-                                dialogApply.setMessage("Applying...");
-                                Handler handler = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    @RequiresApi(api = Build.VERSION_CODES.N)
-                                    public void run() {
-                                        //Apply to Lockscreen
-                                        try {
-                                            WallpaperManager.getInstance(getActivity()).setBitmap(imageResult.getBitmap(), rect, true, WallpaperManager.FLAG_LOCK);
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                            Toast.makeText(getContext(), "Err, Something went wrong...", Toast.LENGTH_SHORT).show();
-                                            Log.e("Drywall", "Custom wallpaper couldn't be captured properly");
-                                        }
-                                        dialogApply.dismiss();
-                                    }
-                                }, 3000);
+                                //Blur the wallpaper
+                                try {
+                                    Bitmap bm = BlurImage(drawableToBitmap(wallpaperManager.getDrawable()));
+                                    wallpaperManager.setBitmap(bm);
+                                    Toast.makeText(getActivity(), "Done",
+                                            Toast.LENGTH_SHORT).show();
+                                } catch (Exception e) {
+                                    Toast.makeText(getActivity(), "Error, Cannot Blur Current Wallpaper",
+                                            Toast.LENGTH_LONG).show();
+                                }
+                                refreshWallpaperPreview();
                                 dialog.dismiss();
                             }
                         });
@@ -334,99 +263,14 @@ public class Device extends Fragment {
                                 dialog.findViewById(R.id.btn_dialog_two)
                         );
 
-                        dialogButtonTwo.setVisibility(View.GONE);
-                        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                            dialogButtonTwo.setVisibility(View.VISIBLE);
-                        }
-
                         dialog.show();
-                    }
-                }).show(getChildFragmentManager());
-
-            }
-        });
-
-        blur.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-
-                                        final Dialog dialog = new Dialog(getContext());
-                                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                                        dialog.setCancelable(false);
-                                        dialog.setContentView(R.layout.round_dialog_buttons);
-
-                                        TextView text = dialog.findViewById(R.id.text_dialog);
-                                        text.setText(blurMsg);
-
-                                        Button dialogButtonTwo = dialog.findViewById(R.id.btn_dialog_two);
-                                        dialogButtonTwo.setText("Cancel");
-                                        dialogButtonTwo.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View view) {
-                                                dialog.dismiss();
-                                            }
-                                        });
-
-                                        Button dialogButton = dialog.findViewById(R.id.btn_dialog);
-                                        dialogButton.setText("Blur Wallpaper");
-                                        dialogButton.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                //Blur the wallpaper
-                                                try {
-                                                    Bitmap bm = BlurImage(drawableToBitmap(wallpaperManager.getDrawable()));
-                                                    wallpaperManager.setBitmap(bm);
-                                                    Toast.makeText(getActivity(), "Done",
-                                                            Toast.LENGTH_SHORT).show();
-                                                } catch (Exception e) {
-                                                    Toast.makeText(getActivity(), "Error, Cannot Blur Current Wallpaper",
-                                                            Toast.LENGTH_LONG).show();
-                                                }
-                                                refreshWallpaperPreview();
-                                                dialog.dismiss();
-                                            }
-                                        });
-
-                                        AnimationHelper.animateGroup(
-                                                dialog.findViewById(R.id.text_dialog),
-                                                dialog.findViewById(R.id.btn_dialog),
-                                                dialog.findViewById(R.id.btn_dialog_two)
-                                        );
-
-                                        dialog.show();
-                                    }
-                                });
-
-                setCustomOffset.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        wallpaperManager.setWallpaperOffsetSteps(xStep, yStep);
-                        wallpaperManager.suggestDesiredDimensions(SettingsProvider.getInt(getActivity(), "customWidth", width), SettingsProvider.getInt(getActivity(), "customHeight", height));
-
-
-                        Drawable wallpaperDrawable = wallpaperManager.getDrawable();
-                        final Bitmap bm = ((BitmapDrawable) wallpaperDrawable).getBitmap();
-                        Bitmap bitmap = Bitmap.createScaledBitmap(bm, SettingsProvider.getInt(getActivity(), "customWidth", width), SettingsProvider.getInt(getActivity(), "customHeight", height), true);
-
-                        try {
-                            wallpaperManager.setBitmap(bitmap);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        refreshWallpaperPreview();
-
-                    }
-                });
-
-                setSingleOffest.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                        return false; // true to keep the Speed Dial open
+                    case R.id.action_single_offset:
                         wallpaperManager.setWallpaperOffsetSteps(xStep, yStep);
                         wallpaperManager.suggestDesiredDimensions(width, height);
 
                         Drawable wallpaperDrawable = wallpaperManager.getDrawable();
-                        final Bitmap bm = ((BitmapDrawable) wallpaperDrawable).getBitmap();
+                        Bitmap bm = ((BitmapDrawable) wallpaperDrawable).getBitmap();
                         Bitmap bitmap = Bitmap.createScaledBitmap(bm, width, height, true);
 
                         try {
@@ -435,11 +279,124 @@ public class Device extends Fragment {
                             e.printStackTrace();
                         }
                         refreshWallpaperPreview();
+                        return false; // true to keep the Speed Dial open
+                    case R.id.action_custom_offset:
+                        wallpaperManager.setWallpaperOffsetSteps(xStep, yStep);
+                        wallpaperManager.suggestDesiredDimensions(SettingsProvider.getInt(getActivity(), "customWidth", width), SettingsProvider.getInt(getActivity(), "customHeight", height));
 
-                    }
-                });
 
-                //Add animations here
+                        wallpaperDrawable = wallpaperManager.getDrawable();
+                        bm = ((BitmapDrawable) wallpaperDrawable).getBitmap();
+                        bitmap = Bitmap.createScaledBitmap(bm, SettingsProvider.getInt(getActivity(), "customWidth", width), SettingsProvider.getInt(getActivity(), "customHeight", height), true);
+
+                        try {
+                            wallpaperManager.setBitmap(bitmap);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        refreshWallpaperPreview();
+                        return false; // true to keep the Speed Dial open
+                    case R.id.action_custom_image:
+                        ImagePicker.build(new DialogConfiguration()
+                                .setTitle("Select Custom Wallpaper")
+                                .setOptionOrientation(LinearLayoutCompat.HORIZONTAL), new ImageResultListener() {
+                            @Override
+                            public void onImageResult(final ImageResult imageResult) {
+                                //Take data and put it in wallpaper manager and preview
+                                final Dialog dialog = new Dialog(getContext());
+                                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                dialog.setContentView(R.layout.round_dialog_buttons);
+
+                                TextView text = dialog.findViewById(R.id.text_dialog);
+                                text.setText(applyMessage);
+
+                                Button dialogButton = dialog.findViewById(R.id.btn_dialog);
+                                dialogButton.setText("Homescreen");
+                                dialogButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        final AlertDialog dialogApply = new SpotsDialog(getContext());
+                                        dialogApply.show();
+                                        dialogApply.setMessage("Applying...");
+                                        Handler handler = new Handler();
+                                        handler.postDelayed(new Runnable() {
+                                            public void run() {
+                                                //Apply to Homescreen
+                                                try {
+                                                    WallpaperManager.getInstance(getActivity()).setBitmap(imageResult.getBitmap());
+                                                } catch (IOException e) {
+                                                    e.printStackTrace();
+                                                    Toast.makeText(getContext(), "Err, Something went wrong...", Toast.LENGTH_SHORT).show();
+                                                    Log.e("Drywall", "Custom wallpaper couldn't be captured properly");
+                                                }
+                                                refreshWallpaperPreview();
+                                                dialogApply.dismiss();
+                                            }
+                                        }, 3000);
+                                        dialog.dismiss();
+
+                                    }
+                                });
+
+                                Button dialogButtonTwo = dialog.findViewById(R.id.btn_dialog_two);
+                                dialogButtonTwo.setText("Lockscreen");
+                                dialogButtonTwo.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        final AlertDialog dialogApply = new SpotsDialog(getContext());
+                                        dialogApply.show();
+                                        dialogApply.setMessage("Applying...");
+                                        Handler handler = new Handler();
+                                        handler.postDelayed(new Runnable() {
+                                            @RequiresApi(api = Build.VERSION_CODES.N)
+                                            public void run() {
+                                                //Apply to Lockscreen
+                                                try {
+                                                    WallpaperManager.getInstance(getActivity()).setBitmap(imageResult.getBitmap(), rect, true, WallpaperManager.FLAG_LOCK);
+                                                } catch (IOException e) {
+                                                    e.printStackTrace();
+                                                    Toast.makeText(getContext(), "Err, Something went wrong...", Toast.LENGTH_SHORT).show();
+                                                    Log.e("Drywall", "Custom wallpaper couldn't be captured properly");
+                                                }
+                                                dialogApply.dismiss();
+                                            }
+                                        }, 3000);
+                                        dialog.dismiss();
+                                    }
+                                });
+
+                                AnimationHelper.animateGroup(
+                                        dialog.findViewById(R.id.text_dialog),
+                                        dialog.findViewById(R.id.btn_dialog),
+                                        dialog.findViewById(R.id.btn_dialog_two)
+                                );
+
+                                dialogButtonTwo.setVisibility(View.GONE);
+                                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                    dialogButtonTwo.setVisibility(View.VISIBLE);
+                                }
+
+                                dialog.show();
+                            }
+                        })
+                                .show(getChildFragmentManager());
+                        return false; // true to keep the Speed Dial open
+                    case R.id.action_reset:
+                        try {
+                            wallpaperManager.clear();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        refreshWallpaperPreview();
+                        return false; // true to keep the Speed Dial open
+                    default:
+                        return false;
+                }
+            }
+        });
+
+        //Add animations here
 
         wallpaperDrawable = wallpaperManager.getDrawable();
 

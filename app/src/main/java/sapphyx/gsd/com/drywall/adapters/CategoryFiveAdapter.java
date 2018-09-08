@@ -2,27 +2,25 @@ package sapphyx.gsd.com.drywall.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Point;
-import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.FitCenter;
+import com.bumptech.glide.request.RequestOptions;
 import com.prof.rssparser.Article;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import sapphyx.gsd.com.drywall.R;
 import sapphyx.gsd.com.drywall.activity.DetailsActivity;
 import sapphyx.gsd.com.drywall.util.AnimationHelper;
-import sapphyx.gsd.com.drywall.util.PaletteTransformation;
 import sapphyx.gsd.com.drywall.util.SettingsProvider;
 
 public class CategoryFiveAdapter extends RecyclerView.Adapter<CategoryFiveAdapter.ViewHolder> {
@@ -31,8 +29,6 @@ public class CategoryFiveAdapter extends RecyclerView.Adapter<CategoryFiveAdapte
 
     private int rowLayout;
     private Context mContext;
-
-    private boolean usePalette = true;
 
     public CategoryFiveAdapter(ArrayList<Article> list, int rowLayout, Context context) {
 
@@ -62,13 +58,6 @@ public class CategoryFiveAdapter extends RecyclerView.Adapter<CategoryFiveAdapte
     @Override
     public void onBindViewHolder(final CategoryFiveAdapter.ViewHolder viewHolder, final int position) {
 
-        WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int imageWidth = (width / 2);
-
         SettingsProvider.get(mContext)
                 .edit()
                 .putInt("categoryFiveCount", getItemCount())
@@ -76,34 +65,18 @@ public class CategoryFiveAdapter extends RecyclerView.Adapter<CategoryFiveAdapte
 
         viewHolder.title.setText(articles.get(position).getTitle());
 
-        Picasso.with(mContext).setIndicatorsEnabled(false);
+        RequestOptions options = new RequestOptions();
+        options.placeholder(R.drawable.app_background)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .error(R.drawable.ic_alert)
+                .transform(new FitCenter());
 
-        Picasso.with(mContext)
+        Glide.with(mContext)
                 .load(articles.get(position).getImage())
-                .resize(imageWidth, imageWidth)
-                .centerCrop()
-                .transform(PaletteTransformation.instance())
-                .into(viewHolder.image,
-                        new PaletteTransformation.PaletteCallback(viewHolder.image) {
-                            @Override
-                            public void onSuccess(Palette palette) {
-                                if (usePalette) {
-                                    if (palette != null) {
-                                        Palette.Swatch wallSwatch = palette.getDominantSwatch();
-                                        if (wallSwatch != null ) {
-                                            viewHolder.titleBg.setBackgroundColor(wallSwatch.getRgb());
-                                            viewHolder.titleBg.setAlpha((float) 0.5);
-                                            viewHolder.title.setTextColor(wallSwatch.getBodyTextColor());
-                                            viewHolder.title.setAlpha(1);
-                                        }
-                                    }
-                                }
-                            }
-
-                            @Override
-                            public void onError() {
-                            }
-                        });
+                .apply(RequestOptions.fitCenterTransform())
+                .thumbnail(0.3f)
+                .apply(options)
+                .into(viewHolder.image);
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

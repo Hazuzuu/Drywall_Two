@@ -15,10 +15,11 @@ import sapphyx.gsd.com.drywall.R;
 
 public class RoundDialogHelper {
 
-    //DialogHelper is a custom class we use to inflate a dialog
-    // of which in this case is themed to use round corners
-    // and designed for whatever use we intend it for
-    //Later, Il try to adapt this to preference dialogs...maybe itl work
+    /**
+     * A Helper Class for a re-useable round dialog for messages and alerts
+     * @param activity
+     * @param msg
+     */
 
     public void showAlertDialog(Activity activity, String msg){
 

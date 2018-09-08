@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.widget.TextView;
 
 /**
  * Created by ry on 11/16/16.

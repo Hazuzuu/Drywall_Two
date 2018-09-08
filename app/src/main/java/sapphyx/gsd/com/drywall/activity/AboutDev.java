@@ -41,14 +41,14 @@ public class AboutDev extends AppCompatActivity {
         FancyAboutPage fancyAboutPage=findViewById(R.id.fancyaboutpage);
         fancyAboutPage.setCover(R.drawable.gsd_logo);
         fancyAboutPage.setName("Ryan Gocal");
-        fancyAboutPage.setDescription("A free lance android developer that seeks innovation, and originality");
-        fancyAboutPage.setAppIcon(R.mipmap.ic_launcher);
+        fancyAboutPage.setDescription("A freelancer android developer that seeks innovation and originality");
+        fancyAboutPage.setAppIcon(R.mipmap.ic_launcher_round);
         fancyAboutPage.setAppName("Drywall");
-        fancyAboutPage.setVersionNameAsAppSubTitle("2.01.10");
-        fancyAboutPage.setAppDescription("Drywall is a powerfull wallpaper provider powered by rss and minimalistic material design.\n\n" +
-                "Built with minimal use of Android Libraries, a small utility belt of settings and tools and some pretty awesome walls for your launcher homescreen.\n\n" +
-                "Wallpapers used from UnSplash are credited by their orignal Authors and Direct links.\n\n" +
-                "This application aims to be quit different from the other wallpaper apps you have probably tried. Enjoy!");
+        fancyAboutPage.setVersionNameAsAppSubTitle("2.01.15");
+        fancyAboutPage.setAppDescription("Drywall, a wallpaper companion app for Sapphyx Launcher, is also a wallpaper provider for all.\n\n" +
+                "Built by design, Simple to use, and Great wallpapers awaiting on arrival.\n\n" +
+                "Wallpapers used from UnSplash are credited by their original Authors.\n\n" +
+                "This application aims to be the odd child from the other wallpaper dashboards you have probably tried, Enjoy!");
         fancyAboutPage.addEmailLink("rgocal09@gmail.com");
         fancyAboutPage.addFacebookLink("https://www.facebook.com/Gocalsd/");
         fancyAboutPage.addTwitterLink("https://twitter.com/Rgocal");

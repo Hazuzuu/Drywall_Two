@@ -21,7 +21,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -30,8 +29,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.FitCenter;
+import com.bumptech.glide.request.RequestOptions;
 import com.github.chrisbanes.photoview.PhotoView;
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -46,6 +48,12 @@ import dmax.dialog.SpotsDialog;
 import sapphyx.gsd.com.drywall.R;
 import sapphyx.gsd.com.drywall.util.AnimationHelper;
 import sapphyx.gsd.com.drywall.util.RoundDialogHelper;
+
+/**
+ * The wallpaper preview activity
+ * We use Glide to render the wallpaper in full view in PhotoView
+ * We use Picasso to download the data and send it to Wallpaper Provider
+ */
 
 public class DetailsActivity extends Activity {
 
@@ -248,34 +256,18 @@ public class DetailsActivity extends Activity {
             }
         });
 
-        Picasso.with(DetailsActivity.this)
+        RequestOptions options = new RequestOptions();
+        options.placeholder(R.drawable.app_background)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .error(R.drawable.ic_alert)
+                .transform(new FitCenter());
+
+        Glide.with(DetailsActivity.this)
                 .load(wall)
-                .networkPolicy(NetworkPolicy.OFFLINE)
-                .into(image, new Callback() {
-                    @Override
-                    public void onSuccess() {
-
-                    }
-
-                    @Override
-                    public void onError() {
-                        //Try again online if cache failed
-                        Picasso.with(DetailsActivity.this)
-                                .load(wall)
-                                .error(R.drawable.ic_alert)
-                                .into(image, new Callback() {
-                                    @Override
-                                    public void onSuccess() {
-
-                                    }
-
-                                    @Override
-                                    public void onError() {
-                                        Log.v("Picasso","Could not fetch image");
-                                    }
-                                });
-                    }
-                });
+                .apply(RequestOptions.fitCenterTransform())
+                .thumbnail(0.3f)
+                .apply(options)
+                .into(image);
 
         saveWallLocation = Environment.getExternalStorageDirectory().getAbsolutePath() + getResources().getString(R.string.walls_save_location);
         picName = getResources().getString(R.string.walls_prefix_name);

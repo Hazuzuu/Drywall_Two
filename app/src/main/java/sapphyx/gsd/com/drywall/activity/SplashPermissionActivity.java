@@ -29,6 +29,11 @@ import sapphyx.gsd.com.drywall.R;
 import sapphyx.gsd.com.drywall.util.AnimationHelper;
 import sapphyx.gsd.com.drywall.views.IntrusiveTextView;
 
+/**
+ * A splash activity that handles runtime permissions on startup
+ * We could alwasy call them when required but doing it this way is hassle free
+ */
+
 public class SplashPermissionActivity extends AppCompatActivity {
 
     int timeoutMillis = 800;

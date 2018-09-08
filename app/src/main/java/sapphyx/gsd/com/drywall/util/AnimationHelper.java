@@ -1,10 +1,6 @@
 package sapphyx.gsd.com.drywall.util;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.view.View;
-import android.view.animation.Interpolator;
-import android.view.animation.LinearInterpolator;
 
 import xyz.klinker.android.floating_tutorial.util.DensityConverter;
 

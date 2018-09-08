@@ -8,6 +8,7 @@ import sapphyx.gsd.com.drywall.fragments.Device;
 
 /**
  * Created by ry on 3/2/18.
+ * This activity is used as a shortcut to the Dashboard Fragment
  */
 
 public class DeviceFrame extends AppCompatActivity{

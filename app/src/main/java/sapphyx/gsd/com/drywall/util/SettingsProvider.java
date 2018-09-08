@@ -1,12 +1,8 @@
 package sapphyx.gsd.com.drywall.util;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.os.Build;
 import android.preference.PreferenceManager;
-import android.support.v4.content.ContextCompat;
 
 /**
  * Created by ry on 1/4/18.
@@ -23,15 +19,6 @@ public class SettingsProvider {
             SettingsProvider.settings = new SettingsProvider();
             return SettingsProvider.settings;
         }
-    }
-    public static SettingsProvider assumeNotNull() {
-        return settings;
-    }
-    public static void invalidate() {
-        SettingsProvider.settings = null;
-    }
-    public static void invalidate(Context context) {
-        SettingsProvider.settings = new SettingsProvider();
     }
 
     public static SharedPreferences get(Context context) {
@@ -72,10 +59,6 @@ public class SettingsProvider {
 
     public static void putInt(Context context, String key, int value) {
         put(context).putInt(key, value);
-    }
-
-    public static void restart() {
-        android.os.Process.killProcess(android.os.Process.myPid());
     }
 
 }

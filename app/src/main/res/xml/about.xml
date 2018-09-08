@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <Preference
         android:selectable="false"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_round"
         android:title="Developed by:"
         android:summary="GocalSD"/>
 
@@ -10,6 +10,11 @@
         android:key="pref_license"
         android:title="Open Source License"
         android:summary="@string/app_copyright"/>
+
+    <Preference
+        android:key="pref_donate"
+        android:title="Donate"
+        android:summary="@string/app_donate"/>
 
     <Preference
         android:key="pref_more"

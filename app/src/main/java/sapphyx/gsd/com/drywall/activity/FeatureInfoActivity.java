@@ -13,6 +13,7 @@ import sapphyx.gsd.com.drywall.R;
 
 /**
  * Created by ry on 2/18/18.
+ * A popup activity that simply shows the Wallpaper Title and Description info if any
  */
 
 public class FeatureInfoActivity extends AppCompatActivity {

@@ -6,14 +6,13 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.TextView;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.DecimalFormat;
 
 @SuppressLint("AppCompatCustomView")
-public class NumberTextview extends TextView {
+public class NumberTextview extends IntrusiveTextView {
 
     private String mNumStart = "0";
     private String mNumEnd;
